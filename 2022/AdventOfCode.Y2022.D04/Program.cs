@@ -19,7 +19,7 @@
             var covered = assigments.Where(a => a.Item1.Covers(a.Item2) || a.Item2.Covers(a.Item1)).ToArray();
             Console.WriteLine($"Part One: Covered Assignments Count = {covered.Length}");
 
-            var overlapped = assigments.Where(a => a.Item1.Overlaps(a.Item2) || a.Item2.Overlaps(a.Item1)).ToArray();
+            var overlapped = assigments.Where(a => a.Item1.Overlaps(a.Item2)).ToArray();
             Console.WriteLine($"Part Two: Overlapped Assignments Count = {overlapped.Length}");
         }
 
@@ -64,7 +64,7 @@
         public bool Overlaps(CleaningAssignment otherAssignment)
         {
             return (otherAssignment._start >= this._start && otherAssignment._start <= this._end)
-                || (otherAssignment._end >= this._start && otherAssignment._end <= this._end);
+                || (this._start >= otherAssignment._start && this._start <= otherAssignment._end);
         }
     }
 }
